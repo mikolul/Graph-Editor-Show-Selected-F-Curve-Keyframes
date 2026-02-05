@@ -1,8 +1,17 @@
 # Graph Editor: Show Selected F-Curve Keyframes
 
-In new versions of Blender, "Show Selected F-Curve Keyframes" has been moved from Graph Editor to Preferences. This addon restores access to "Show Selected F-Curve Keyframes" setting in the Graph Editor using Keymap.
+In new versions of Blender, "Show Selected F-Curve Keyframes" has been moved from Graph Editor to Preferences.
+This addon restores access "Only Show Selected F-Curve Keyframes" in Graph Editor.
 
-Creating an operator from Preferences to create a hotkey for displaying selected F-Curve Keyframes in the Graph Editor.
+<div align="center">
+
+![SavingPrivateRyan](https://github.com/mikolul/Graph-Editor-Show-Selected-F-Curve-Keyframes/blob/main/img/Show-only-selected-filter.gif?raw=true)
+</div>
+
+Addon:
+1) Creates a button that toggles the setting. 
+
+2) Creating an operator from Preferences to create a hotkey for displaying selected F-Curve Keyframes in the Graph Editor.
 
 There are two ways to run the addon:
 - [Standard installation](#installation)
@@ -18,12 +27,13 @@ There are two ways to run the addon:
     - `Edit` -> `Preferences` -> `Add-ons`
     - Click `Install...` and select the downloaded file
     - Enable the addon
-3. Go to:
+3. Save Preferences
+4. (Optional) If you want to assign a hotkey for toggling, go to:
     - `Edit` -> `Preferences` -> `Keymap` -> `Graph Editor` -> `Graph Editor Generic`
     - Click `Add new`
     - Set Identifier from `none` to `graph.toggle_only_show_selected`
     - Assign any hotkey (example): `Ctrl + Shift + H`
-4. Save Preferences
+
 
 ## Run in current session
 
@@ -32,6 +42,20 @@ There are two ways to run the addon:
 ```python
 import bpy
 
+def draw_sos_filter(self, context):
+    layout = self.layout
+    row = layout.row(align=True)
+
+    prefs = context.preferences
+
+    row.prop(
+        prefs.edit,
+        "show_only_selected_curve_keyframes",
+        text="",
+        icon='FILTER',
+        toggle=True
+    )
+    
 class GRAPH_OT_toggle_only_show_selected(bpy.types.Operator):
     bl_idname = "graph.toggle_only_show_selected"
     bl_label = "Toggle Only Show Selected F-Curve Keyframes"
@@ -40,19 +64,21 @@ class GRAPH_OT_toggle_only_show_selected(bpy.types.Operator):
         prefs = context.preferences
         prefs.edit.show_only_selected_curve_keyframes ^= True
         return {'FINISHED'}
-        
+
 def register():
     bpy.utils.register_class(GRAPH_OT_toggle_only_show_selected)
+    bpy.types.GRAPH_HT_header.append(draw_sos_filter)
 
 def unregister():
     bpy.utils.unregister_class(GRAPH_OT_toggle_only_show_selected)
+    bpy.types.GRAPH_HT_header.remove(draw_sos_filter)
 
 if __name__ == "__main__":
     register()
 ```
 
 3. Click `play icon`
-4. Go to:
+4. (Optional) If you want to assign a hotkey for toggling, go to:
     - `Edit` -> `Preferences` -> `Keymap` -> `Graph Editor` -> `Graph Editor Generic`
     - Click `Add new`
     - Set Identifier from `none` to `graph.toggle_only_show_selected`
