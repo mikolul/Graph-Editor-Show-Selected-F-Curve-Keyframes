@@ -9,8 +9,7 @@ This addon restores access "Only Show Selected F-Curve Keyframes" in Graph Edito
 </div>
 
 Addon:
-1) Creates a button that toggles the setting. 
-
+1) Creates a button that toggles the setting.
 2) Creating an operator from Preferences to create a hotkey for displaying selected F-Curve Keyframes in the Graph Editor.
 
 There are two ways to run the addon:
