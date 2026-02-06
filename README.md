@@ -10,7 +10,7 @@ This addon restores access "Only Show Selected F-Curve Keyframes" in Graph Edito
 
 Addon:
 1) Creates a button that toggles the setting. 
-2) Creating an operator from Preferences to create a hotkey for displaying selected F-Curve Keyframes in the Graph Editor.
+2) Creates an `Identifier` for a hotkey.
 
 There are two ways to run the addon:
 - [Standard installation](#installation)
@@ -27,7 +27,7 @@ There are two ways to run the addon:
     - Click `Install...` and select the downloaded file
     - Enable the addon
 3. Save Preferences
-4. (Optional) If you want to assign a hotkey for toggling, go to:
+4. (Optional) If you want to assign a hotkey, go to:
     - `Edit` -> `Preferences` -> `Keymap` -> `Graph Editor` -> `Graph Editor Generic`
     - Click `Add new`
     - Set Identifier from `none` to `graph.toggle_only_show_selected`
@@ -77,7 +77,7 @@ if __name__ == "__main__":
 ```
 
 3. Click `play icon`
-4. (Optional) If you want to assign a hotkey for toggling, go to:
+4. (Optional) If you want to assign a hotkey, go to:
     - `Edit` -> `Preferences` -> `Keymap` -> `Graph Editor` -> `Graph Editor Generic`
     - Click `Add new`
     - Set Identifier from `none` to `graph.toggle_only_show_selected`
